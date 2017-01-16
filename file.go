@@ -133,16 +133,16 @@ func (f *File) AddSheet(sheetName string) (*Sheet, error) {
 }
 
 // Appends an existing Sheet, with the provided name, to a File
-func (f *File) AppendSheet(sheet *Sheet, sheetName string) error {
+func (f *File) AppendSheet(sheet Sheet, sheetName string) (*Sheet, error) {
 	if _, exists := f.Sheet[sheetName]; exists {
 		return nil, fmt.Errorf("duplicate sheet name '%s'.", sheetName)
 	}
 	sheet.Name = sheetName
 	sheet.File = f
 	sheet.Selected = len(f.Sheets) == 0
-	f.Sheet[sheetName] = sheet
-	f.Sheets = append(f.Sheets, sheet)
-	return nil
+	f.Sheet[sheetName] = &sheet
+	f.Sheets = append(f.Sheets, &sheet)
+	return &sheet, nil
 }
 
 func (f *File) makeWorkbook() xlsxWorkbook {
