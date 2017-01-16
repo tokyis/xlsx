@@ -255,9 +255,9 @@ func (l *FileSuite) TestAddSheetWithDuplicateName(c *C) {
 // Test that we can append a sheet to a File
 func (l *FileSuite) TestAppendSheet(c *C) {
 	var f *File
-	
+
 	f = NewFile()
-	s := &Sheet{}
+	s := Sheet{}
 	sheet, err := f.AppendSheet(s, "MySheet")
 	c.Assert(err, IsNil)
 	c.Assert(sheet, NotNil)
@@ -268,7 +268,7 @@ func (l *FileSuite) TestAppendSheet(c *C) {
 // Test that AppendSheet returns an error if you try to add two sheets with the same name
 func (l *FileSuite) TestAppendSheetWithDuplicateName(c *C) {
 	f := NewFile()
-	s := &Sheet{}
+	s := Sheet{}
 	_, err := f.AppendSheet(s, "MySheet")
 	c.Assert(err, IsNil)
 	_, err = f.AppendSheet(s, "MySheet")
